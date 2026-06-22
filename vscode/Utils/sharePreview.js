@@ -54,20 +54,21 @@ export const escapeHtml = (value) =>
 export const normalizeBaseUrl = (value) =>
   String(value || "https://news.aasmo.in").replace(/\/+$/, "");
 
-export const getPublicImageUrl = (imageUrl, frontendBaseUrl) => {
+export const getPublicImageUrl = (
+  imageUrl,
+  frontendBaseUrl,
+  backendPublicUrl = "https://backend.xpressnews.in",
+) => {
   const frontendBase = normalizeBaseUrl(frontendBaseUrl);
+  const backendBase = normalizeBaseUrl(backendPublicUrl);
   if (!imageUrl) return `${frontendBase}/image.png`;
 
   const source = String(imageUrl).trim();
   if (!source) return `${frontendBase}/image.png`;
   if (source.startsWith(frontendBase)) return source;
 
-  if (source.startsWith("https://newsapp.aasmo.in")) {
-    return source.replace("https://newsapp.aasmo.in", frontendBase);
-  }
-
-  if (source.startsWith("http://newsapp.aasmo.in")) {
-    return source.replace("http://newsapp.aasmo.in", frontendBase);
+  if (source.startsWith(backendBase)) {
+    return source.replace(backendBase, frontendBase);
   }
 
   if (source.startsWith("https://")) return source;

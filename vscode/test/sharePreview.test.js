@@ -11,7 +11,7 @@ const FRONTEND_URL = "https://news.aasmo.in";
 test("getPublicImageUrl maps backend and relative uploads to the frontend domain", () => {
   assert.equal(
     getPublicImageUrl(
-      "https://newsapp.aasmo.in/uploads/news/image.jpg",
+      "https://backend.xpressnews.in/uploads/news/image.jpg",
       `${FRONTEND_URL}/`,
     ),
     `${FRONTEND_URL}/uploads/news/image.jpg`,
@@ -23,6 +23,17 @@ test("getPublicImageUrl maps backend and relative uploads to the frontend domain
   assert.equal(
     getPublicImageUrl(undefined, FRONTEND_URL),
     `${FRONTEND_URL}/image.png`,
+  );
+});
+
+test("getPublicImageUrl supports a different backend origin for local testing", () => {
+  assert.equal(
+    getPublicImageUrl(
+      "https://newsapp.aasmo.in/uploads/news/image.jpg",
+      FRONTEND_URL,
+      "https://newsapp.aasmo.in",
+    ),
+    `${FRONTEND_URL}/uploads/news/image.jpg`,
   );
 });
 

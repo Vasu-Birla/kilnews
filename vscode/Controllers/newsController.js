@@ -6199,7 +6199,11 @@ export const shareNewsPreview = async (req, res) => {
         300,
       ) || "Read the full article on EMS-News.";
     const imageSource = news.media?.find((item) => item.type !== "video")?.url;
-    const imageUrl = getPublicImageUrl(imageSource, frontendBaseUrl);
+    const imageUrl = getPublicImageUrl(
+      imageSource,
+      frontendBaseUrl,
+      process.env.BACKEND_PUBLIC_URL,
+    );
     const articleUrl = `${frontendBaseUrl}/news/${encodeURIComponent(slug)}`;
     const html = buildSharePreviewHtml({
       articleUrl,
