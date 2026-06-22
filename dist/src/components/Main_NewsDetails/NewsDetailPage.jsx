@@ -1001,15 +1001,17 @@ const getWhatsappShareUrl = () => {
   const handleShareClick = async () => {
     if (!article) return;
     const plainTitle = stripHtmlTags(article.title_hi || article.title_en);
+    const previewShareUrl = getWhatsappShareUrl();
     if (navigator.share) {
       try {
         await navigator.share({
           title: plainTitle,
-          text: `${plainTitle}\n\nपूरी खबर यहाँ पढ़ें: ${finalShareUrl}`,
+          text: plainTitle,
+          url: previewShareUrl,
         });
       } catch (err) {}
     } else {
-      navigator.clipboard.writeText(finalShareUrl);
+      navigator.clipboard.writeText(previewShareUrl);
       alert("Link copied!");
     }
   };
