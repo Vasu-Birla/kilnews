@@ -1,0 +1,411 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-width: 100%;
+  min-height: 100vh;
+  display: block; /* flex hatao */
+}
+#root {
+  width: 100%;
+}
+
+.directory-page {
+  width: 100vw;
+}
+
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px; /* Desktop width */
+  max-width: 80%; /* Mobile me adjust */
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 0px 8px;
+  transform: translateX(-100%); /* Hidden by default */
+  transition: transform 0.3s ease-in-out;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+/* Open state */
+.sidebar.active {
+  transform: translateX(0);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 90%; /* Mobile me almost full width */
+    transform: translateX(-100%);
+  }
+  .sidebar.active {
+    transform: translateX(0);
+  }
+}
+
+/* TopStory.css */
+
+/* Main Slider Container */
+.main-slider-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio (e.g., 1080p video) */
+  /* If you want a squarer image on mobile, you could use a media query: */
+  /*
+  @media (max-width: 767.98px) { /* Bootstrap's 'md' breakpoint minus 1px */
+  /* padding-bottom: 75%; /* 4:3 aspect ratio */
+  /* } */
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.article-content img {
+  max-width: 100%; /* यह सुनिश्चित करता है कि इमेज अपने पैरेंट कंटेनर से बाहर न जाए */
+  height: auto; /* आस्पेक्ट रेश्यो (अनुपात) को बनाए रखता है, ताकि इमेज विकृत न हो */
+  display: block; /* बेहतर लेआउट नियंत्रण और सेंटरिंग के लिए */
+  margin-left: auto; /* इमेज को सेंटर करने के लिए */
+  margin-right: auto; /* इमेज को सेंटर करने के लिए */
+  margin-bottom: 1rem; /* इमेज के नीचे कुछ स्पेस देने के लिए */
+  border-radius: 0.25rem; /* वैकल्पिक: अगर आप गोल किनारे चाहते हैं */
+}
+
+.slider-link {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.8s ease-in-out;
+  z-index: 1; /* Default z-index */
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.slider-link.active {
+  opacity: 1;
+  z-index: 2; /* Active slide on top */
+}
+
+.slider-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Thumbnail Container for Right-Side News */
+.thumbnail-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 66.66%; /* 3:2 Aspect Ratio */
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.thumbnail-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* General responsive text adjustments (optional, Bootstrap classes are usually enough) */
+/*
+@media (max-width: 767.98px) {
+  .main-slider-container h2 {
+    font-size: 1.25rem !important; /* Smaller on mobile */
+/*}
+  .right-side-news-card p {
+    font-size: 0.9rem !important;
+  }
+}
+*/
+
+
+
+.font-hi,
+.font-hi * {
+  font-family: "Noto Sans Devanagari", "Noto Sans", Arial, sans-serif !important;
+}
+
+.font-en,
+.font-en * {
+  font-family: "Khand", sans-serif !important;
+}
+
+
+/* Apply Khand font ONLY to Header elements */
+/* .header-container,
+.header-container * {
+  font-family:  "Noto Sans Devanagari", "Noto Sans", Arial, sans-serif !important;
+} */
+
+/* Sab elements pe Khand font apply karo body, */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+div,
+button,
+input,
+textarea {
+  font-family: "Khand", sans-serif !important;
+}
+header,
+.right-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+
+/* Header slide effect */
+.translate-up {
+  transform: translateY(-100%);
+  transition: transform 0.4s ease-in-out;
+}
+
+/* Add this in your CSS file or inside a style tag */
+.blue-header {
+  position: sticky; /* या fixed अगर हमेशा ऊपर दिखाना है */
+  top: 0;
+  z-index: 1000; /* White header के ऊपर रहें */
+  background-color: #0d2d62;
+}
+
+.translate-down {
+  transform: translateY(0);
+  transition: transform 0.4s ease-in-out;
+}
+
+/* ✅ इस स्टाइल को रहने दें */
+.social-icon-circle {
+  background-color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0185c6;
+  font-size: 14px;
+}
+/* src/App.css */
+
+/* इस स्टाइल को App.css में जोड़ें */
+
+/* यह क्लास मुख्य कंटेंट को साइडबार के लिए जगह बनाने के लिए है */
+.main-content-with-fixed-sidebar {
+  margin-left: 250px; /* साइडबार की चौड़ाई */
+  padding: 20px;
+  background-color: #f0f2f5;
+  min-height: calc(100vh - 124px); /* हेडर की ऊंचाई घटाकर बची हुई ऊंचाई */
+}
+
+/* मोबाइल और टैबलेट पर जब साइडबार छिप जाए, तो मार्जिन हटा दें */
+@media (max-width: 991.98px) {
+  .main-content-with-fixed-sidebar {
+    margin-left: 0;
+  }
+}
+/* src/App.css */
+
+/* पूरे पेज के लिए एक कंटेनर */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* पूरी स्क्रीन की ऊंचाई */
+}
+
+/* फिक्स्ड हेडर एरिया */
+.page-header {
+  flex-shrink: 0; /* इसे सिकुड़ने से रोकता है */
+}
+
+.img-fluid {
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important; /* ✅ Puri image bina crop ke show hogi */
+}
+
+/* मुख्य कंटेंट एरिया (साइडबार और कंटेंट) */
+.main-content-area {
+  display: flex;
+  flex-grow: 1; /* बची हुई जगह ले लेता है */
+  overflow: hidden; /* अतिरिक्त कंटेंट को छिपाता है */
+}
+
+/* बायाँ और दाहिना साइडबार */
+.left-sidebar,
+.right-sidebar {
+  flex-shrink: 0; /* इन्हें सिकुड़ने से रोकता है */
+  overflow-y: auto; /* अगर कंटेंट ज्यादा हो तो स्क्रॉलबार दिखाता है */
+  height: 100%;
+}
+
+.left-sidebar {
+  width: 250px;
+  border-right: 1px solid #e9ecef;
+}
+
+.right-sidebar {
+  width: 380px;
+  padding: 1.5rem; /* 24px padding */
+  border-left: 1px solid #e9ecef;
+}
+
+/* बीच का कंटेंट जो स्क्रॉल होगा */
+.center-content {
+  flex-grow: 1; /* बची हुई सारी जगह ले लेता है */
+  overflow-y: auto; /* केवल यह एरिया स्क्रॉल होगा */
+  padding: 1.5rem; /* 24px padding */
+}
+
+/* छोटे स्क्रीन पर साइडबार छिपाने के लिए */
+@media (max-width: 992px) {
+  .left-sidebar,
+  .right-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .state-dropdown {
+    min-width: 100% !important; /* full screen */
+    grid-template-columns: 1fr !important; /* single column */
+  }
+
+  * {
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: normal;
+  }
+
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* approx 20 words (adjust as needed) */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .letest-news-img {
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: contain;
+  }
+
+  .header-action-text {
+    font-size: 12px !important; /* ya 10px/12px jo bhi chhota chahiye */
+  }
+}
+
+/* टाइटल्स के अंदर आने वाले किसी भी p या span को जबरदस्ती बोल्ड करना */
+/* .title-clamp-2-lines *, 
+.manoranjan-section *,
+h1[dangerouslySetInnerHTML] * {
+    font-weight: inherit !important;
+    margin: 0 !important;
+    display: inline !important;
+} */
+
+
+/* --- न्यूज़ हेडलाइन मास्टर स्टाइल --- */
+.news-headline-master {
+    font-weight: 800 !important; /* अक्षरों को एकदम मोटा करेगा */
+    line-height: 1.3 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 2 लाइन की लिमिट */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* एडिटर के अंदर के टैग्स के लिए */
+.news-headline-master p, 
+.news-headline-master span, 
+.news-headline-master strong, 
+.news-headline-master b {
+    display: inline !important; 
+    font-weight: 800 !important; /* यहाँ भी मोटाई बढ़ा दी */
+    margin: 0 !important;
+    padding: 0 !important;
+    /* नोट: यहाँ हमने 'color' नहीं लिखा है, ताकि आपके एडिटर वाला रंग बना रहे */
+}
+
+/* पूरी हेडलाइन दिखाने के लिए (NewsDetailPage के लिए) */
+.news-headline-master.full-view {
+    -webkit-line-clamp: unset !important;
+    display: block !important;
+}
+
+/* --- 🗞️ न्यूज़ हेडलाइन मास्टर क्लास (साइज + बोल्ड + कलर सेफ) --- */
+.news-headline-bold {
+    font-weight: 900 !important; /* 👈 यहाँ 100 को 900 कर दिया, अब एकदम मोटा दिखेगा */
+    line-height: 1.3 !important;
+    color: inherit; /* बाहर से दिया गया कलर (जैसे White) उठाएगा */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 2 लाइन की लिमिट */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 !important;
+}
+
+/* 📱 मोबाइल साइज (fs-5 के बराबर) */
+@media (max-width: 767px) {
+    .news-headline-bold {
+        font-size: 1.25rem !important; 
+    }
+}
+
+/* 💻 डेस्कटॉप साइज (fs-4 के बराबर) */
+@media (min-width: 768px) {
+    .news-headline-bold {
+        font-size: 1.5rem !important; 
+    }
+}
+
+/* एडिटर से आने वाले p, span, b टैग्स को मोटा और बड़ा करने के लिए */
+.news-headline-bold p, 
+.news-headline-bold span, 
+.news-headline-bold strong, 
+.news-headline-bold b,
+.news-headline-bold div {
+    display: inline !important; /* लाइन टूटने से बचाएगा */
+    font-weight: 900 !important; 
+    font-size: inherit !important; 
+    color: inherit !important; /* अंदर के टैग्स का कलर भी बाहर जैसा रहेगा */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* पूरी हेडलाइन के लिए (Detail Page) */
+.news-headline-bold.full-view {
+    -webkit-line-clamp: unset !important;
+    display: block !important;
+    font-size: 2rem !important; /* डिटेल पेज पर और भी बड़ा */
+}
+
+/* न्यूज़ डिटेल पेज के अंदर के कंटेंट को पूरा दिखाने के लिए */
+.article-content, .article-content p {
+    display: block !important; /* फ्लेक्स/वेबकिट-बॉक्स हटा देगा */
+    -webkit-line-clamp: unset !important; /* लाइन लिमिट हटा देगा */
+    overflow: visible !important; /* कंटेंट को दिखने देगा */
+    height: auto !important;
+}

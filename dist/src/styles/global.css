@@ -1,0 +1,71 @@
+/* Sidebar ka basic styling */
+.sidebar-nav ul {
+    list-style: none;
+    padding: 15px 0 0 0;
+    margin: 0;
+}
+
+.sidebar-nav .nav-link-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+    gap: 15px; /* Icon aur text ke beech space */
+}
+
+/* Jab link active ho */
+.sidebar-nav .nav-link-item.active {
+    color: #c42026; /* Active color */
+    font-weight: bold;
+}
+
+.sidebar-nav .nav-link-item .plus-icon {
+    margin-left: auto; /* Plus icon ko right me bhejega */
+    color: #888;
+}
+
+/* ------ Hover Dropdown Logic ------ */
+
+/* 1. Jis 'li' ke andar dropdown hai, usko relative position do */
+.nav-item-with-dropdown {
+    position: relative;
+}
+
+/* 2. Dropdown ko by default chhupa do aur position set karo */
+.nav-item-with-dropdown .dropdown-content {
+    display: none; /* Important: By default hidden */
+    position: absolute;
+    left: 100%; /* Parent (li) ke right mein start ho */
+    top: 0;      /* Parent (li) ke top se align ho */
+    z-index: 1000;
+    background-color: #c42026; /* Aapke image jaisa red color */
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 0;
+    margin: 0;
+}
+
+/* 3. Sabse zaroori: Jab parent 'li' par hover ho, tab uske andar wale dropdown ko dikhao */
+.nav-item-with-dropdown:hover .dropdown-content {
+    display: block; /* Important: Show on hover */
+}
+
+/* Dropdown ke andar ke links ki styling */
+.dropdown-content li {
+    list-style: none;
+}
+
+.dropdown-content li a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content li a:hover {
+    background-color: #a91b20; /* Thoda dark red on hover */
+}

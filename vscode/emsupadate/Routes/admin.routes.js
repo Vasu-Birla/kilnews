@@ -1,0 +1,649 @@
+
+
+// // import express from 'express';
+// // import { authenticate, hasRole, canManageNews, canManageShorts, canManageAds, canManageHeadlines, canManageCategories, canManageSubCategories, canManageUsers, isAdmin } from '../middlewares/auth.js';
+// // import upload from '../middlewares/multer.middleware.js';
+
+// // // Import controllers based on required permissions
+// // import { createHeadline, deleteHeadline, getAllHeadlines, getHeadlineById, updateHeadline } from '../controllers/headlineController.js';
+// // import { createCategory, getAllCategories, getCategoryById, updateCategory, deleteCategory, createSubCategory, getAllSubCategories, getSubCategoryById, updateSubCategory, deleteSubCategory } from '../controllers/taggingController.js';
+// // import { getAllCountries, getStatesByCountry, getCitiesByState } from '../controllers/locationDataController.js';
+// // import { getAllReporters } from '../Controllers/userManagementController.js'; // Import getAllReporters for admins if they have permission
+
+// // // News Management
+// // import { getAllNews, getNewsById, updateNews, deleteNews } from '../Controllers/newsController.js';
+
+// // // Ads Management
+// // import { createAd, getAllAds, updateAd, deleteAd } from '../Controllers/ad.controller.js';
+
+// // // Shorts Management
+// // import { createShort, getAllShorts, getShortById, updateShort, deleteShort } from '../controllers/shortsController.js';
+
+// // const router = express.Router();
+
+// // // Public Routes for Location Data (can remain public as they are lookup data)
+// // router.get('/countries', getAllCountries);
+// // router.get('/countries/:countryId/states', getStatesByCountry);
+// // router.get('/states/:stateId/cities', getCitiesByState);
+
+// // // Public Routes for Categories/Subcategories (read-only for non-admin users, but accessible if they hit this endpoint)
+// // router.get('/categories', getAllCategories);
+// // router.get('/categories/:id', getCategoryById);
+// // router.get('/subcategories', getAllSubCategories);
+// // router.get('/subcategories/:id', getSubCategoryById);
+
+
+// // // --- All routes below require 'admin' or 'superadmin' role and specific granular permissions ---
+// // // router.use(authenticate, hasRole(['admin', 'superadmin'])); // Base authentication and role check
+
+// // router.use(authenticate, isAdmin);
+
+// // router.get('/reporters', canManageUsers, getAllReporters); // Admins can view reporters if they have 'manageUsers'
+
+
+// // // Category Management (Admin with 'manageCategories' permission)
+// // router.post('/categories', canManageCategories, createCategory);
+// // router.put('/categories/:id', canManageCategories, updateCategory);
+// // router.delete('/categories/:id', canManageCategories, deleteCategory);
+
+// // // SubCategory Management (Admin with 'manageSubCategories' permission)
+// // router.post('/subcategories', canManageSubCategories, createSubCategory);
+// // router.put('/subcategories/:id', canManageSubCategories, updateSubCategory);
+// // router.delete('/subcategories/:id', canManageSubCategories, deleteSubCategory);
+
+// // // Headline Management (Admin with 'manageHeadlines' permission)
+// // router.post('/headlines', canManageHeadlines, createHeadline); // Renamed from '/headline' for consistency
+// // router.get('/headlines', canManageHeadlines, getAllHeadlines);
+// // router.get('/headlines/:id', canManageHeadlines, getHeadlineById);
+// // router.put('/headlines/:id', canManageHeadlines, updateHeadline);
+// // router.delete('/headlines/:id', canManageHeadlines, deleteHeadline);
+
+
+// // // News Management (Admin with 'manageNews' permission)
+// // router.get('/news', canManageNews, getAllNews); // Admin will fetch all news including pending for approval
+// // router.get('/news/:id', canManageNews, getNewsById);
+// // router.put('/news/:id', canManageNews, upload.array('mediaFiles', 10), updateNews); // Update news status, content etc.
+// // router.delete('/news/:id', canManageNews, deleteNews);
+
+
+// // // Ads Management (Admin with 'manageAds' permission)
+// // router.post('/ads', canManageAds, upload.single('media'), createAd);
+// // router.get('/ads', canManageAds, getAllAds);
+// // router.put('/ads/:id', canManageAds, upload.single('media'), updateAd);
+// // router.delete('/ads/:id', canManageAds, deleteAd);
+
+
+// // // Shorts Management (Admin with 'manageShorts' permission)
+// // router.post('/shorts', canManageShorts, upload.fields([{ name: 'video', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]), createShort);
+// // router.get('/shorts', canManageShorts, getAllShorts); // Admin will see all shorts (all statuses)
+// // router.get('/shorts/:id', canManageShorts, getShortById);
+// // router.put('/shorts/:id', canManageShorts, upload.fields([{ name: 'video', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]), updateShort);
+// // router.delete('/shorts/:id', canManageShorts, deleteShort);
+
+// // export default router;
+
+// // routes/admin.routes.js
+
+
+// import express from 'express';
+// import { 
+//     authenticate, 
+//     isAdmin, 
+//     // NEW granular permission imports based on your updated auth.js
+//     canCreateNews, canUpdateNews, canDeleteNews, canApproveNews,
+//     canCreateShorts, canUpdateShorts, canDeleteShorts, canApproveShorts,
+//     canCreateAds, canUpdateAds, canDeleteAds, canApproveAds,
+//     canCreateHeadlines, canUpdateHeadlines, canDeleteHeadlines, canApproveHeadlines,
+//     canCreateCategories, canUpdateCategories, canDeleteCategories,
+//     canCreateSubCategories, canUpdateSubCategories, canDeleteSubCategories,
+//     canCreateUsers, canUpdateUsers, canDeleteUsers, // For general user management
+//     canCreateReporters, canUpdateReporters, canDeleteReporters // For reporter account management
+// } from '../middlewares/auth.js';
+// import upload from '../middlewares/multer.middleware.js';
+
+// // Import controllers based on required permissions
+// import { createHeadline, deleteHeadline, getAllHeadlines, getHeadlineById, updateHeadline } from '../controllers/headlineController.js';
+// import { createCategory, getAllCategories, getCategoryById, updateCategory, deleteCategory, createSubCategory, getAllSubCategories, getSubCategoryById, updateSubCategory, deleteSubCategory } from '../controllers/taggingController.js';
+// import { getAllCountries, getStatesByCountry, getCitiesByState } from '../controllers/locationDataController.js';
+// import { getAllReporters } from '../Controllers/userManagementController.js'; 
+
+// // News Management
+// import { getAllNews, getNewsById, updateNews, deleteNews } from '../Controllers/newsController.js';
+
+// // Ads Management
+// import { createAd, getAllAds, updateAd, deleteAd } from '../Controllers/ad.controller.js';
+
+// // Shorts Management
+// import { createShort, getAllShorts, getShortById, updateShort, deleteShort } from '../controllers/shortsController.js';
+
+// const router = express.Router();
+
+// // Public Routes for Location Data (can remain public as they are lookup data)
+// router.get('/countries', getAllCountries);
+// router.get('/countries/:countryId/states', getStatesByCountry);
+// router.get('/states/:stateId/cities', getCitiesByState);
+
+// // Public Routes for Categories/Subcategories (read-only for non-admin users, but accessible if they hit this endpoint)
+// // Note: If you want to restrict even read access for certain roles, move these below the authenticate middleware
+// router.get('/categories', getAllCategories);
+// router.get('/categories/:id', getCategoryById);
+// router.get('/subcategories', getAllSubCategories);
+// router.get('/subcategories/:id', getSubCategoryById);
+
+
+// // --- All routes below require 'admin' or 'superadmin' role and specific granular permissions ---
+// router.use(authenticate, isAdmin); // Base authentication and role check for all routes below
+
+// // Reporter Viewing (Admin with 'updateReporters' permission, as it implies ability to view for management)
+// router.get('/reporters', canUpdateReporters, getAllReporters); // Admins can view reporters if they have 'manageReporters.update' permission
+
+
+// // Category Management (Admin with specific 'manageCategories' permissions)
+// router.post('/categories', canCreateCategories, createCategory);
+// router.put('/categories/:id', canUpdateCategories, updateCategory);
+// router.delete('/categories/:id', canDeleteCategories, deleteCategory);
+
+// // SubCategory Management (Admin with specific 'manageSubCategories' permissions)
+// router.post('/subcategories', canCreateSubCategories, createSubCategory);
+// router.put('/subcategories/:id', canUpdateSubCategories, updateSubCategory);
+// router.delete('/subcategories/:id', canDeleteSubCategories, deleteSubCategory);
+
+// // Headline Management (Admin with specific 'manageHeadlines' permissions)
+// router.post('/headlines', canCreateHeadlines, createHeadline);
+// router.get('/headlines', canUpdateHeadlines, getAllHeadlines); // Using canUpdateHeadlines as a proxy for view access
+// router.get('/headlines/:id', canUpdateHeadlines, getHeadlineById); // Using canUpdateHeadlines as a proxy for view access
+// router.put('/headlines/:id', canUpdateHeadlines, updateHeadline);
+// router.delete('/headlines/:id', canDeleteHeadlines, deleteHeadline);
+
+
+// // News Management (Admin with specific 'manageNews' permissions)
+// router.get('/news', canUpdateNews, getAllNews); // Admin will fetch all news including pending for approval
+// router.get('/news/:id', canUpdateNews, getNewsById);
+// router.put('/news/:id', canUpdateNews, upload.array('mediaFiles', 10), updateNews); // Update news status, content etc.
+// router.delete('/news/:id', canDeleteNews, deleteNews);
+// // If you have an approval endpoint for news, it would be:
+// // router.put('/news/:id/approve', canApproveNews, approveNewsControllerFunction); 
+
+
+// // Ads Management (Admin with specific 'manageAds' permissions)
+// router.post('/ads', canCreateAds, upload.single('media'), createAd);
+// router.get('/ads', canUpdateAds, getAllAds); // Using canUpdateAds as a proxy for view access
+// router.put('/ads/:id', canUpdateAds, upload.single('media'), updateAd);
+// router.delete('/ads/:id', canDeleteAds, deleteAd);
+
+
+// // Shorts Management (Admin with specific 'manageShorts' permissions)
+// router.post('/shorts', canCreateShorts, upload.fields([{ name: 'video', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]), createShort);
+// router.get('/shorts', canUpdateShorts, getAllShorts); // Admin will see all shorts (all statuses)
+// router.get('/shorts/:id', canUpdateShorts, getShortById);
+// router.put('/shorts/:id', canUpdateShorts, upload.fields([{ name: 'video', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]), updateShort);
+// router.delete('/shorts/:id', canDeleteShorts, deleteShort);
+// // If you have an approval endpoint for shorts, it would be:
+// // router.put('/shorts/:id/approve', canApproveShorts, approveShortsControllerFunction); 
+
+
+// export default router;
+
+
+
+
+// import express from 'express';
+// import { 
+//     authenticate, 
+//     isAdmin, 
+//     // Permission middlewares
+//     canCreateNews, canUpdateNews, canDeleteNews, canApproveNews,
+//     canCreateShorts, canUpdateShorts, canDeleteShorts, canApproveShorts,
+//     canCreateAds, canUpdateAds, canDeleteAds, canApproveAds,
+//     canCreateHeadlines, canUpdateHeadlines, canDeleteHeadlines, canApproveHeadlines,
+//     canCreateCategories, canUpdateCategories, canDeleteCategories,
+//     canCreateSubCategories, canUpdateSubCategories, canDeleteSubCategories,
+//     canCreateUsers, canUpdateUsers, canDeleteUsers,
+//     canCreateReporters, canUpdateReporters, canDeleteReporters,
+//     canCreatePoll,
+//     canUpdatePoll,
+//     canDeletePoll
+// } from '../middlewares/auth.js';
+
+// import upload from '../middlewares/multer.middleware.js';
+
+// // Controllers
+// import { createHeadline, deleteHeadline, getAllHeadlines, getHeadlineById, updateHeadline } from '../controllers/headlineController.js';
+// import { createCategory, getAllCategories, getCategoryById, updateCategory, deleteCategory, createSubCategory, getAllSubCategories, getSubCategoryById, updateSubCategory, deleteSubCategory } from '../controllers/taggingController.js';
+// import { getAllCountries, getStatesByCountry, getCitiesByState } from '../controllers/locationDataController.js';
+// import { deleteReporterById, getAllReporters, updateReporterById } from '../Controllers/userManagementController.js'; 
+// import { getAllNews, getNewsById, updateNews, deleteNews } from '../Controllers/newsController.js';
+// import { createAd, getAllAds, updateAd, deleteAd } from '../Controllers/ad.controller.js';
+// import { createShort, getAllShorts, getShortById, updateShort, deleteShort } from '../controllers/shortsController.js';
+// import { loginUser, registerUser } from '../controllers/authController.js';
+// import {
+//   createPoll,
+ 
+//   getAllPolls,
+//   getPollResults,
+//   deactivatePoll,
+//   updatePoll,
+// } from '../Controllers/polls.controller.js';
+// const router = express.Router();
+
+
+// // ─────────────────────────────────────────
+// // ✅ PUBLIC ROUTES — Accessible without login
+// // ─────────────────────────────────────────
+
+// // Location Data
+// router.get('/countries', getAllCountries);
+// router.get('/countries/:countryId/states', getStatesByCountry);
+// router.get('/states/:stateId/cities', getCitiesByState);
+
+// // Categories & Subcategories (read-only)
+// router.get('/categories', getAllCategories);
+// router.get('/categories/:id', getCategoryById);
+// router.get('/subcategories', getAllSubCategories);
+// router.get('/subcategories/:id', getSubCategoryById);
+
+// // ⭐ Public access to News, Headlines, Ads, Shorts
+// router.get('/public/news', getAllNews);             // e.g., /api/public/news
+// router.get('/public/news/:id', getNewsById);
+
+// router.get('/public/headlines', getAllHeadlines);
+// router.get('/public/headlines/:id', getHeadlineById);
+
+// router.get('/public/ads', getAllAds);
+
+// router.get('/public/shorts', getAllShorts);
+// router.get('/public/shorts/:id', getShortById);
+
+// router.post('/login', loginUser);
+
+// // ─────────────────────────────────────────
+// // 🔐 ADMIN + PERMISSION ROUTES (Protected)
+// // ─────────────────────────────────────────
+// router.use(authenticate, isAdmin); // Everything below requires admin + permission
+
+// // Reporter Management
+// router.get('/reporters', canUpdateReporters, getAllReporters);
+// router.put("/reporters/:id", canUpdateReporters, updateReporterById);
+// router.delete('/reporters/:id',canDeleteReporters, deleteReporterById);
+// router.post('/register',canCreateReporters, upload.single('profileImageFile'), registerUser);
+// // Category Management
+// router.post('/categories', canCreateCategories, createCategory);
+// router.put('/categories/:id', canUpdateCategories, updateCategory);
+// router.delete('/categories/:id', canDeleteCategories, deleteCategory);
+
+// // SubCategory Management
+// router.post('/subcategories', canCreateSubCategories, createSubCategory);
+// router.put('/subcategories/:id', canUpdateSubCategories, updateSubCategory);
+// router.delete('/subcategories/:id', canDeleteSubCategories, deleteSubCategory);
+
+// // Headline Management
+// router.post('/headline', canCreateHeadlines, createHeadline);
+// router.get('/headline', canUpdateHeadlines, getAllHeadlines);
+// router.get('/headline/:id', canUpdateHeadlines, getHeadlineById);
+// router.put('/headline/:id', canUpdateHeadlines, updateHeadline);
+// router.delete('/headline/:id', canDeleteHeadlines, deleteHeadline);
+
+// // News Management
+// router.get('/news', canUpdateNews, getAllNews);
+// router.get('/news/:id', canUpdateNews, getNewsById);
+// router.put('/news/:id', canUpdateNews, upload.array('mediaFiles', 10), updateNews);
+// router.delete('/news/:id', canDeleteNews, deleteNews);
+
+// // Ads Management
+// router.post('/ads', canCreateAds, upload.single('media'), createAd);
+// router.get('/ads', canUpdateAds, getAllAds);
+// router.put('/ads/:id', canUpdateAds, upload.single('media'), updateAd);
+// router.delete('/ads/:id', canDeleteAds, deleteAd);
+
+// // Shorts Management
+// router.post('/shorts', canCreateShorts, upload.fields([{ name: 'video', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]), createShort);
+// router.get('/shorts', canUpdateShorts, getAllShorts);
+// router.get('/shorts/:id', canUpdateShorts, getShortById);
+// router.put('/shorts/:id', canUpdateShorts, upload.fields([{ name: 'video', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]), updateShort);
+// router.delete('/shorts/:id', canDeleteShorts, deleteShort);
+
+
+
+
+// // Protected Routes
+
+// // poll mangemnetn 
+// router.get('/polls', getAllPolls);
+// router.get('/:pollId', getPollResults);
+// router.post('/polls', canCreatePoll, createPoll);
+// router.put('/polls/:id', canUpdatePoll, updatePoll);
+// router.put('/deactivate/:pollId',canDeletePoll,  deactivatePoll);
+// // router.post('/polls',  createPoll);
+// // router.put('/polls/:id',  updatePoll);
+// // router.put('/polls/deactivate/:pollId',  deactivatePoll);
+
+
+// export default router;
+
+
+// update by dpp ////////////////////////////////////
+
+
+
+
+
+import express from 'express';
+import { 
+    authenticate, 
+    isAdmin, 
+    // Permission middlewares
+    canUpdateNews, canDeleteNews, 
+    canCreateShorts, canUpdateShorts, canDeleteShorts,
+    canCreateAds, canUpdateAds, canDeleteAds, 
+    canCreateHeadlines, canUpdateHeadlines, canDeleteHeadlines, 
+    canCreateCategories, canUpdateCategories, canDeleteCategories,
+    canCreateSubCategories, canUpdateSubCategories, canDeleteSubCategories,
+    canCreateReporters, canUpdateReporters, canDeleteReporters,
+    canCreatePoll,
+    canUpdatePoll,
+    canDeletePoll
+} from '../Middlewares/auth.js';
+
+import upload from '../Middlewares/multer.middleware.js';
+
+// Controllers
+import { createHeadline, deleteHeadline, getAllHeadlines, getHeadlineById, updateHeadline } from '../Controllers/headlineController.js';
+import { createCategory, getAllCategories, getCategoryById, updateCategory, deleteCategory, createSubCategory, getAllSubCategories, getSubCategoryById, updateSubCategory, deleteSubCategory } from '../Controllers/taggingController.js';
+import { getAllCountries, getStatesByCountry, getCitiesByState } from '../Controllers/locationDataController.js';
+import { deleteReporterById, getAllReporters, updateReporterById } from '../Controllers/userManagementController.js'; 
+import { getAllNews, getNewsById, updateNews, deleteNews, getAllNewsAdmin, createNews, getNewsByReporter, downloadNewsPDF } from '../Controllers/newsController.js';
+import { createAd, getAllAds, updateAd, deleteAd } from '../Controllers/ad.controller.js';
+import { createShort, getAllShorts, getShortById, updateShort, deleteShort } from '../Controllers/shortsController.js';
+import { loginUser, registerUser } from '../Controllers/authController.js';
+import {
+  createPoll, 
+ 
+  getAllPolls,
+  getPollResults,
+  deactivatePoll,
+  updatePoll,
+  getAllPollsAdmin,
+  deletePoll,
+} from '../Controllers/polls.controller.js';
+import { createVideo, deleteVideo, getAllVideos, getVideoById, updateVideo } from '../Controllers/video.controller.js';
+import { createTag, deleteTag, getAllTags, getTrendingTopics, updateTag } from '../Controllers/tagController.js';
+import { getCategoryNews, getSelectedCategories, setCategoryNews } from '../Controllers/CategoryNews.js';
+import { addSlidesToStory, createStory, deleteStory, getAllStories, getStoryById } from '../Controllers/story.controller.js';
+import { uploadMultipleFilesToSpaces } from '../Services/s3Service.js';
+import { createCompanyCategory, createCompanySubCategory, deleteCompanyCategory, deleteCompanySubCategory, getAllCompanyCategories, getAllCompanySubCategories, getCompanyCategoryById, getCompanySubCategoryById, updateCompanyCategory, updateCompanySubCategory } from '../Controllers/companyCategory.controller.js';
+import { approveCompany, approveCompanyUpdate, getAllCompanies, getApprovedCompanies, getCompaniesByCategory, getCompanyProfile, getPendingCompanyUpdates, registerCompany, rejectCompany, rejectCompanyUpdate, requestCompanyUpdate, updateCompany } from '../Controllers/companyController.js';
+import { approveProduct, createProduct, getAllProductsForAdmin, getCompanyProducts, getProductByIdForCompany, getPublicCompanyProducts, rejectProduct, requestDeleteProduct, updateProduct } from '../Controllers/companyproduct.controllers.js';
+import { addLiveUpdate, createLiveNews, endLiveNews, getAllLiveNews, getLiveNewsById } from '../Controllers/liveNewsController.js';
+const router = express.Router();
+
+
+// ─────────────────────────────────────────
+// ✅ PUBLIC ROUTES — Accessible without login
+// ─────────────────────────────────────────
+
+// Location Data
+router.get('/countries', getAllCountries);
+router.get('/countries/:countryId/states', getStatesByCountry);
+router.get('/states/:stateId/cities', getCitiesByState);
+
+// Categories & Subcategories (read-only)
+router.get('/categories', getAllCategories);
+router.get('/categories/:id', getCategoryById);
+router.get('/subcategories', getAllSubCategories);
+router.get('/subcategories/:id', getSubCategoryById);
+
+// ⭐ Public access to News, Headlines, Ads, Shorts
+router.get('/public/news', getAllNews);             // e.g., /api/public/news
+router.get('/public/news/:id', getNewsById);
+
+router.get('/public/headlines', getAllHeadlines);
+router.get('/public/headlines/:id', getHeadlineById);
+
+router.get('/public/ads', getAllAds);
+
+router.get('/public/shorts', getAllShorts);
+router.get('/public/shorts/:id', getShortById);
+
+router.post('/login', loginUser);
+
+
+router.post("/set-category", setCategoryNews);
+
+// Get news of selected category
+router.get("/selected-category-news", getCategoryNews);
+router.get("/selected-categories", getSelectedCategories);
+
+
+
+
+
+// ✅ Get all stories
+router.get("/Stories", getAllStories);
+
+// ✅ Get story by ID
+router.get("/getStoryById/:storyId", getStoryById);
+router.post("/upload-media", upload.array("mediaFiles", 10), async (req, res) => {
+  try {
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: "No files uploaded" });
+    }
+
+    const urls = await uploadMultipleFilesToSpaces(req.files, "news-media");
+    res.json({ locations: urls });
+  } catch (err) {
+    console.error("Upload error:", err);
+    res.status(500).json({ error: "Upload failed" });
+  }
+});
+
+// ─────────────────────────────────────────
+// 🔐 ADMIN + PERMISSION ROUTES (Protected)
+// ─────────────────────────────────────────
+router.use(authenticate, isAdmin); // Everything below requires admin + permission
+// ✅ Create story (with media upload)
+router.post("/createStory",  upload.array("slides"), createStory);
+
+router.delete("/createStory/:storyId" , deleteStory);
+router.post("/createStory/slides/:storyId",  upload.array("slides"), addSlidesToStory);
+router.post('/news', upload.array('mediaFiles', 10), createNews);
+
+// Reporter Management
+router.get('/reporters', canUpdateReporters, getAllReporters);
+router.put("/reporters/:Id", canUpdateReporters, updateReporterById);
+router.delete('/reporters/:id',canDeleteReporters, deleteReporterById);
+router.post('/register',canCreateReporters, upload.single('profileImageFile'), registerUser);
+// Category Management
+router.post('/categories', canCreateCategories, createCategory);
+router.put('/categories/:id', canUpdateCategories, updateCategory);
+router.delete('/categories/:id', canDeleteCategories, deleteCategory);
+
+// SubCategory Management
+router.post('/subcategories', canCreateSubCategories, createSubCategory);
+router.put('/subcategories/:id', canUpdateSubCategories, updateSubCategory);
+router.delete('/subcategories/:id', canDeleteSubCategories, deleteSubCategory);
+
+// Headline Management
+router.post('/headline', canCreateHeadlines, createHeadline);
+router.get('/headline', canUpdateHeadlines, getAllHeadlines);
+router.get('/headline/:id', canUpdateHeadlines, getHeadlineById);
+router.put('/headline/:id', canUpdateHeadlines, updateHeadline);
+router.delete('/headline/:id', canDeleteHeadlines, deleteHeadline);
+
+
+// Video Management Routes
+router.post('/video', upload.single('videoFile'), createVideo);
+router.get('/video', getAllVideos);
+router.get('/video/:id', getVideoById);
+router.put('/video/:id', updateVideo);
+router.delete('/video/:id',  deleteVideo);
+
+
+// News Management
+router.get('/news', canUpdateNews, getAllNewsAdmin);
+router.get('/news/:id', canUpdateNews, getNewsById);
+router.put('/news/:id', canUpdateNews, upload.array('mediaFiles', 10), updateNews);
+router.delete('/news/:id', canDeleteNews, deleteNews);
+
+// Ads Management
+router.post('/ads', canCreateAds, upload.single('media'), createAd);
+router.get('/ads', canUpdateAds, getAllAds);
+router.put('/ads/:id', canUpdateAds, upload.single('media'), updateAd);
+router.delete('/ads/:id', canDeleteAds, deleteAd);
+
+// Shorts Management
+router.post('/shorts', canCreateShorts, upload.fields([{ name: 'video', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]), createShort);
+router.get('/shorts', canUpdateShorts, getAllShorts);
+router.get('/shorts/:id', canUpdateShorts, getShortById);
+router.put('/shorts/:id', canUpdateShorts, upload.fields([{ name: 'video', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]), updateShort);
+router.delete('/shorts/:id', canDeleteShorts, deleteShort);
+
+
+
+
+// Protected Routes
+
+// poll mangemnetn 
+router.get('/polls', getAllPollsAdmin);
+router.get('/polls/:id', getPollResults);
+router.post('/polls', canCreatePoll, createPoll);
+router.put('/polls/:id', canUpdatePoll, updatePoll);
+router.put('/deactivate/:pollId',canDeletePoll,  deactivatePoll);
+router.delete('/polls/:id', canDeletePoll, deletePoll);
+
+// router.post('/polls',  createPoll);
+// router.put('/polls/:id',  updatePoll);
+// router.put('/polls/deactivate/:pollId',  deactivatePoll);
+
+
+// Admin Only
+router.post("/createTag",  createTag);
+router.put("/updateTag/:id",  updateTag);
+router.delete("/deleteTag/:id",  deleteTag);
+
+// Public
+router.get("/getAllTags", getAllTags);
+router.get("/getTrendingTopics", getTrendingTopics);
+
+
+router.get('/getNewsByReporter', getNewsByReporter);
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////
+
+
+// ----- Categories -----
+router.post("/createCompanyCategory", upload.fields([{ name: "image", maxCount: 1 }]),createCompanyCategory);
+router.get("/createCompanyCategory", getAllCompanyCategories);
+router.get("/createCompanyCategory/:id", getCompanyCategoryById);
+router.put(
+  "/createCompanyCategory/:id",
+  upload.fields([{ name: "image", maxCount: 1 }]), // ✅ add multer here
+  updateCompanyCategory
+);
+router.delete("/createCompanyCategory/:id", deleteCompanyCategory);
+
+// ----- SubCategories -----
+router.post("/createCompanySubCategory", createCompanySubCategory);
+router.get("/createCompanySubCategory", getAllCompanySubCategories);
+router.get("/createCompanySubCategory/:id", getCompanySubCategoryById);
+router.put("/createCompanySubCategory/:id", updateCompanySubCategory);
+router.delete("/createCompanySubCategory/:id", deleteCompanySubCategory);
+
+
+router.post(
+  "/Companyregister",
+  upload.fields([
+    { name: "logo", maxCount: 1 },
+    { name: "banner", maxCount: 5 },
+    { name: "aadhaar", maxCount: 1 },
+    { name: "pan", maxCount: 1 },
+    { name: "electricityBill", maxCount: 1 },
+      { name: "passportPhoto", maxCount: 1 } // ✅ ne
+  ]),
+  registerCompany
+);
+router.put("/companies/:companyId",  updateCompany);
+router.get("/getCompaniesByCategory/:categoryId",  getCompaniesByCategory);
+router.get("/getAllCompanies",  getAllCompanies);
+
+// 🔐 Admin approves a company
+router.put("/approve/:companyId",  approveCompany);
+
+
+// 🔐 Admin rejects/deletes a company
+router.delete("/reject/:companyId",  rejectCompany);
+
+
+
+
+///////////////////////////////////////////////// prodcut /////////////////////////////////////////////
+
+
+router.post( "/company/products", upload.fields([{ name: "images", maxCount: 10 }]), createProduct);
+router.get("/company/:companyId/products", getCompanyProducts);
+router.get("/company/products/:productId", getProductByIdForCompany);
+router.put("/company/products/:productId",upload.fields([{ name: "images", maxCount: 10 }]),updateProduct);
+router.delete("/company/products/:productId", requestDeleteProduct); // (Ye delete karne ki request hai, actual deletion admin karega)
+
+
+router.get("/admin/products",getAllProductsForAdmin);
+router.put("/products/approve/:productId", approveProduct);
+router.put( "/products/reject/:productId", rejectProduct);
+
+
+router.get("/my-company-profile",  getCompanyProfile);
+router.get("/public/companies/:companyId/products", getPublicCompanyProducts);
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+router.post("/update-request",  upload.fields([
+    { name: "logo", maxCount: 1 },
+    { name: "banner", maxCount: 5 },
+    { name: "aadhaar", maxCount: 1 },
+    { name: "pan", maxCount: 1 },
+    { name: "electricityBill", maxCount: 1 },
+    { name: "passportPhoto", maxCount: 1 }
+  ]), requestCompanyUpdate);
+
+// Get all approved companies (user/public)
+router.get("/getApproved", getApprovedCompanies);
+
+/* ------------------ ADMIN ROUTES ------------------ */
+
+
+router.get("/pending-updates", getPendingCompanyUpdates);
+
+// Approve a pending update (admin)
+router.put("/getApprovedCompanies/:companyId", approveCompanyUpdate);
+
+// Reject a pending update (admin)
+router.put("/reject/:companyId",  rejectCompanyUpdate);
+
+
+
+
+
+
+/////////////////////////////Live systeam
+
+
+router.post("/createLiveNews", upload.single("coverImage"),createLiveNews);
+router.post("/addLiveUpdate/:id", upload.array("media"), addLiveUpdate);
+router.post("/endLiveNews/:id", endLiveNews);
+router.get("/getLiveNews/:id", getLiveNewsById);
+router.get("/live-news", getAllLiveNews); 
+router.get("/download-pdf",  downloadNewsPDF);
+
+
+
+
+
+export default router;

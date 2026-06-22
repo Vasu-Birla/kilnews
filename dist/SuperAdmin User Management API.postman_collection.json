@@ -1,0 +1,2042 @@
+{
+	"info": {
+		"_postman_id": "4c8149b7-f4b1-4736-921c-7e6258d65e43",
+		"name": "SuperAdmin User Management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46867176",
+		"_collection_link": "https://crimson-firefly-334697.postman.co/workspace/yaswant~fa40616f-f283-4fee-9467-5772ae7c4721/collection/46867176-4c8149b7-f4b1-4736-921c-7e6258d65e43?action=share&source=collection_link&creator=46867176"
+	},
+	"item": [
+		{
+			"name": "superAdmin",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "John Doe",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "superadmin1@gmial.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "superadmin",
+									"type": "text"
+								},
+								{
+									"key": "profileImageFile",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/superadmin/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"superadmin",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"superadmin1@gmial.com\",\r\n  \"password\": \"123456\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/superadmin/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"superadmin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OTA3YmEwZmM0ZDBjYzJkZmI1NGEyMSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzU0Mjk5Mjk2fQ.pMPbz9W5VMejgPOO6YFefJEp2F_HDUoVowR6ixaBPWA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Admin One",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin11@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "AdminPass123!",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "64fddeefccbd6709e96f03e1",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "64fddef7ccbd6709e96f03e2",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "64fddefbccbd6709e96f03e3",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Admin HQ",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "1985-05-10",
+									"type": "text"
+								},
+								{
+									"key": "canDirectPost",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "canDirectGoLive",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "profileImageFile",
+									"type": "file",
+									"src": "/absolute/path/to/admin-image.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/superadmin/create-admin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"superadmin",
+								"create-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Reporter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Reporter One",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "reporter1@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password123!",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "reporter",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "64fddeefccbd6709e96f03e1",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "64fddef7ccbd6709e96f03e2",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "64fddefbccbd6709e96f03e3",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "123 News Street",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "1990-01-01",
+									"type": "text"
+								},
+								{
+									"key": "canDirectPost",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "canDirectGoLive",
+									"value": "false",
+									"type": "text"
+								},
+								{
+									"key": "profileImageFile",
+									"type": "file",
+									"src": "/absolute/path/to/profile-image.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/create-reporter",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"create-reporter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/superadmin/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"superadmin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Reporters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/superadmin/reporters",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"superadmin",
+								"reporters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Reporter by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/superadmin/reporters/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"superadmin",
+								"reporters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Reporter by ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Updated Name",
+									"type": "text"
+								},
+								{
+									"key": "profileImageFile",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/superadmin/reporters/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"superadmin",
+								"reporters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Admin Permissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGM5ODQ5YTYwYmYyMmYxZDUxMWViNiIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzU0MTI5MzU5fQ.aoYsJg_IYKJ6XB2hI1JLiEr4q8Qjn6TP5kLCJjpht7w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Admin User\",\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"secure123\",\r\n  \"role\": \"admin\",\r\n  \"adminPermissions\": {\r\n    \"manageHeadlines\": {\r\n      \"create\": true,\r\n      \"update\": false,\r\n      \"delete\": false,\r\n      \"approve\": false\r\n    },\r\n    \"manageAds\": {\r\n      \"create\": false,\r\n      \"update\": true,\r\n      \"delete\": true\r\n    }\r\n  }\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/superadmin/admins/687a3b9207f15b8479cb9993/permissions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"superadmin",
+								"admins",
+								"687a3b9207f15b8479cb9993",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Login Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin11@example.com\",\r\n  \"password\": \"AdminPass123!\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{base_url}}api/v1/admin/login",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"v1",
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Poll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODA4YjM3ODYxNjljNzc1MWEzYWM5MyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzU0MzcyMTg4fQ.SHSICOgjE21C90UrjV86ObwdZ-xXiIP5KwwiyVnS1b4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"What is your favorite programming language?\",\n  \"options\": [\n    \"JavaScript\",\n    \"Python\",\n    \"Go\"\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/admin/polls",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"polls"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Poll",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"Updated question?\",\n  \"options\": [\"Yes\", \"No\", \"Maybe\"],\n  \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/polls/1234567890abcdef",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"polls",
+								"1234567890abcdef"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate Poll",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/polls/deactivate/:pollId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"polls",
+								"deactivate",
+								":pollId"
+							],
+							"variable": [
+								{
+									"key": "pollId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All News (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGRkYWRlZGY2MGVkNjcyMDZmNzJiMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDEyOTA0MH0.045Scxpeh7nhXsD6tl6tJdy8YzaD5a1rSiyJeVoihVI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://117pw42t-6000.inc1.devtunnels.ms/api/v1/admin/news",
+							"protocol": "https",
+							"host": [
+								"117pw42t-6000",
+								"inc1",
+								"devtunnels",
+								"ms"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"news"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Single News by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/news/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"news",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE News",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGRkYWRlZGY2MGVkNjcyMDZmNzJiMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDEyOTA0MH0.045Scxpeh7nhXsD6tl6tJdy8YzaD5a1rSiyJeVoihVI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://117pw42t-6000.inc1.devtunnels.ms/api/v1/admin/news/688727da390ec7b735816074",
+							"protocol": "https",
+							"host": [
+								"117pw42t-6000",
+								"inc1",
+								"devtunnels",
+								"ms"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"news",
+								"688727da390ec7b735816074"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Update News",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGRkYWRlZGY2MGVkNjcyMDZmNzJiMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDEyOTA0MH0.045Scxpeh7nhXsD6tl6tJdy8YzaD5a1rSiyJeVoihVI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Updated Title",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "mediaFiles",
+									"type": "file",
+									"src": "aD0Uzimac/pexels-pixabay-207692.jpg"
+								},
+								{
+									"key": "tags",
+									"value": "asasa",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "media",
+									"value": "image",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://117pw42t-6000.inc1.devtunnels.ms/api/v1/admin/news/6890ad36179f17a2040f0e94",
+							"protocol": "https",
+							"host": [
+								"117pw42t-6000",
+								"inc1",
+								"devtunnels",
+								"ms"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"news",
+								"6890ad36179f17a2040f0e94"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Shorts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/shorts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"shorts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ad",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OTA3Y2IwZmM0ZDBjYzJkZmI1NGE4YSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDI5OTU2OH0.pDx5qlDtfSwQ-Q36XDCgqyucbFt7OH6hzpZe_XyS4V8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "type",
+									"value": "custom",
+									"type": "text"
+								},
+								{
+									"key": "position",
+									"value": "popup",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Sample Custom Ad",
+									"type": "text"
+								},
+								{
+									"key": "mediaType",
+									"value": "image",
+									"type": "text"
+								},
+								{
+									"key": "media",
+									"type": "file",
+									"src": "/absolute/path/to/your/image.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://117pw42t-6000.inc1.devtunnels.ms/api/v1/admin/ads",
+							"protocol": "https",
+							"host": [
+								"117pw42t-6000",
+								"inc1",
+								"devtunnels",
+								"ms"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"ads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Ads",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/ads",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"ads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ad by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/ads/{{adId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"ads",
+								"{{adId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ad by ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "type",
+									"value": "custom",
+									"type": "text"
+								},
+								{
+									"key": "position",
+									"value": "popup",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Updated Ad Title",
+									"type": "text"
+								},
+								{
+									"key": "mediaType",
+									"value": "image",
+									"type": "text"
+								},
+								{
+									"key": "media",
+									"type": "file",
+									"src": "/absolute/path/to/your/updated-image.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/ads/{{adId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"ads",
+								"{{adId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ad by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/ads/{{adId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"ads",
+								"{{adId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Short",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OTA3Y2IwZmM0ZDBjYzJkZmI1NGE4YSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDI5OTU2OH0.pDx5qlDtfSwQ-Q36XDCgqyucbFt7OH6hzpZe_XyS4V8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Uski muskurahat meri kamzori ban gayi.",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Kuch rishton ka naam nahi hota, bas ehsaas hi kaafi hote hain...",
+									"type": "text"
+								},
+								{
+									"key": "video",
+									"type": "file",
+									"src": "TN7beK1dC/7821648-hd_1080_1920_30fps-1751459142645 (3).mp4"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/absolute/path/to/thumb.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}api/v1/admin/shorts",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"v1",
+								"admin",
+								"shorts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Politics\",\n  \"description\": \"Political news and updates\",\n  \"slug\": \"politics\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Category Name\",\n  \"description\": \"Updated description\",\n  \"slug\": \"updated-slug\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/categories/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"categories",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create SubCategory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Elections\",\n  \"category\": \"{{categoryId}}\",\n  \"description\": \"News about elections\",\n  \"slug\": \"elections\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/subcategories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"subcategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update SubCategory",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated SubCategory\",\n  \"category\": \"{{categoryId}}\",\n  \"description\": \"Updated subcategory description\",\n  \"slug\": \"updated-subcategory\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/subcategories/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"subcategories",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete SubCategory",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/subcategories/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"subcategories",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reporters",
+			"item": [
+				{
+					"name": "Reporters Create Short",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGRlMjhkODQ0ZjIwZmU1MTY4M2EzNyIsInJvbGUiOiJyZXBvcnRlciIsImlhdCI6MTc1NDMwMjY5M30.84f0LCSJHpCCjrgSH67OuR01oYZrhPjKVe8vKEWB0nU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "My Short Video",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "A fun short reel!",
+									"type": "text"
+								},
+								{
+									"key": "video",
+									"type": "file",
+									"src": "pKal356Wc/WhatsApp Video 2025-08-04 at 4.04.44 PM.mp4"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/absolute/path/to/thumb.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/reporter/shorts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reporter",
+								"shorts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Short",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODA4YjM3ODYxNjljNzc1MWEzYWM5MyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzU0MzA1NTQzfQ.CASx4d7SE23EshqJimWoTbdy1FnblnosTTcdRA8_UHM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "My Short Video",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "A fun short reel!",
+									"type": "text"
+								},
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/absolute/path/to/sample.mp4"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/absolute/path/to/thumb.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/reporter/shorts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reporter",
+								"shorts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Reporters",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"reporter1@example.com\", \"password\": \"Password123!\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/reporter/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reporter",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Create News",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGRlMjhkODQ0ZjIwZmU1MTY4M2EzNyIsInJvbGUiOiJyZXBvcnRlciIsImlhdCI6MTc1NDMwMjY5M30.84f0LCSJHpCCjrgSH67OuR01oYZrhPjKVe8vKEWB0nU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Test News Title",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "This is the body of the news.",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Politics",
+									"type": "text"
+								},
+								{
+									"key": "mediaFiles",
+									"type": "file",
+									"src": "/path/to/image.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://117pw42t-6000.inc1.devtunnels.ms/api/v1/reporter/news",
+							"protocol": "https",
+							"host": [
+								"117pw42t-6000",
+								"inc1",
+								"devtunnels",
+								"ms"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reporter",
+								"news"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reply to Comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"Thanks bro! 🙏\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/shorts/{{shortId}}/comments/{{commentId}}/reply",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"shorts",
+								"{{shortId}}",
+								"comments",
+								"{{commentId}}",
+								"reply"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "John Doe",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "user@gmial.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "user",
+									"type": "text"
+								},
+								{
+									"key": "profileImageFile",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"admin121@gmail.com\", \"password\": \"12345\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Poll Results",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/polls/:id/results",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"polls",
+								":id",
+								"results"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Poll By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/polls/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"polls",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vote on Poll",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"optionIndex\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/polls/:id/vote",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"polls",
+								":id",
+								"vote"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Polls",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/polls",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"polls"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userShorts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGRkYWRlZGY2MGVkNjcyMDZmNzJiMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDEyOTA0MH0.045Scxpeh7nhXsD6tl6tJdy8YzaD5a1rSiyJeVoihVI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://117pw42t-6000.inc1.devtunnels.ms/api/v1/user/shorts",
+							"protocol": "https",
+							"host": [
+								"117pw42t-6000",
+								"inc1",
+								"devtunnels",
+								"ms"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"shorts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like/Unlike Short",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4N2EzYmY0MDdmMTViODQ3OWNiOTk5ZSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzU0MzkzNjg0fQ.pmbc4nMTBSZjCbGl0ogwJsw1CdMgZb6qpA6Nejud8d8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/shorts/{{shortId}}/like",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"shorts",
+								"{{shortId}}",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Comment to Short",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODA4YjM3ODYxNjljNzc1MWEzYWM5MyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzU0MzA1NTQzfQ.CASx4d7SE23EshqJimWoTbdy1FnblnosTTcdRA8_UHM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"Awesome short! 🔥\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/shorts/{{shortId}}/comment",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"shorts",
+								"{{shortId}}",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reply to Comment Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODA4YjM3ODYxNjljNzc1MWEzYWM5MyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzU0MzA1NTQzfQ.CASx4d7SE23EshqJimWoTbdy1FnblnosTTcdRA8_UHM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"Thanks bro! 🙏\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/shorts/{{shortId}}/comments/{{commentId}}/reply",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"shorts",
+								"{{shortId}}",
+								"comments",
+								"{{commentId}}",
+								"reply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User All News",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGRkYWRlZGY2MGVkNjcyMDZmNzJiMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDEyOTA0MH0.045Scxpeh7nhXsD6tl6tJdy8YzaD5a1rSiyJeVoihVI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://117pw42t-6000.inc1.devtunnels.ms/api/v1/admin/news",
+							"protocol": "https",
+							"host": [
+								"117pw42t-6000",
+								"inc1",
+								"devtunnels",
+								"ms"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"news"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User-News-Like",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/news/6890ad36179f17a2040f0e94/like",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"news",
+								"6890ad36179f17a2040f0e94",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Comment to News",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODA4YjM3ODYxNjljNzc1MWEzYWM5MyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzU0MzcyMTg4fQ.SHSICOgjE21C90UrjV86ObwdZ-xXiIP5KwwiyVnS1b4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"This is a sample comment.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/news/6890ad36179f17a2040f0e94/comment",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"news",
+								"6890ad36179f17a2040f0e94",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/countries",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get States by Country",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/countries/687a1e2185f0230715032380/states",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"countries",
+								"687a1e2185f0230715032380",
+								"states"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cities by State",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/states/687a1e2285f0230715032384/cities",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"states",
+								"687a1e2285f0230715032384",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/categories/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"categories",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All SubCategories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/subcategories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"subcategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get SubCategory By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/subcategories/687a1eaf07374ea6fa336d93",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"subcategories",
+								"687a1eaf07374ea6fa336d93"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

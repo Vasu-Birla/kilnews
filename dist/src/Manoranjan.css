@@ -1,0 +1,252 @@
+/* --- General Responsive Styles for Manoranjan Section --- */
+.manoranjan-section {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media (min-width: 768px) {
+  .manoranjan-section {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (min-width: 992px) {
+  .manoranjan-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* Ensure all images are responsive by default */
+.manoranjan-section img {
+  max-width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Removes extra space below inline images */
+  object-fit: cover; /* Ensures images cover their container without distortion */
+}
+
+/* Ensure text wraps and doesn't overflow */
+.manoranjan-section p,
+.manoranjan-section h1,
+.manoranjan-section h2,
+.manoranjan-section h3,
+.manoranjan-section h4,
+.manoranjan-section h5,
+.manoranjan-section h6,
+.manoranjan-section small {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto; /* Allow hyphenation for better text flow */
+}
+
+/* --- Custom Header Styles --- */
+.section-divider-top {
+  width: 40px;
+  height: 4px;
+  background-color: #F8D7DA; /* Light red/pink */
+  margin-bottom: 8px;
+}
+
+.header-marker {
+  width: 5px;
+  height: 24px;
+  background-color: #A12D2A; /* Dark red */
+}
+
+.section-title {
+  color: #333; /* Darker text for title */
+  font-size: 1.25rem; /* Default for h5 */
+}
+
+.view-all-link {
+  color: #2E6E9E !important; /* Blue link color */
+  white-space: nowrap; /* Prevent "और पढ़ें" from wrapping */
+}
+
+/* Adjust header for small screens */
+@media (max-width: 575.98px) {
+  .section-header {
+    flex-direction: column; /* Stack header elements */
+    align-items: flex-start !important; /* Align to start */
+  }
+  .section-title {
+    font-size: 1.1rem; /* Slightly smaller title */
+  }
+  .header-marker {
+    height: 20px; /* Slightly smaller marker */
+  }
+  .view-all-link {
+    margin-top: 8px; /* Add some space below HR */
+  }
+  .section-header hr {
+    width: 100%; /* Full width HR */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* --- Main Article Card Styles --- */
+.main-article-card {
+  height: 250px; /* Fixed height for main card on smaller screens */
+  overflow: hidden; /* Hide overflow to crop images */
+  border-radius: var(--bs-border-radius); /* Use Bootstrap's default border-radius */
+}
+
+.main-article-card .image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.main-article-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure image fills container */
+}
+
+.main-article-card .overlay-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 40%, transparent); /* Darker gradient */
+  padding: 10px; /* Smaller padding on small screens */
+  border-radius: 0 0 var(--bs-border-radius) var(--bs-border-radius);
+}
+
+.main-article-title {
+  font-size: 1.1rem; /* Smaller title for mobile */
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+
+/* Adjust main article for medium and large screens */
+@media (min-width: 576px) {
+  .main-article-card {
+    height: 300px; /* Taller on medium screens */
+  }
+  .main-article-card .overlay-text {
+    padding: 15px;
+  }
+  .main-article-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .main-article-card {
+    height: 400px; /* Taller on large screens */
+  }
+  .main-article-card .overlay-text {
+    padding: 20px;
+  }
+  .main-article-title {
+    font-size: 1.5rem; /* Original size for desktop */
+  }
+}
+
+/* --- Bottom Article Card Styles --- */
+.bottom-article-card .bottom-article-img-wrapper {
+  width: 100%;
+  padding-top: 66.66%; /* Aspect ratio 3:2 (height/width * 100) */
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--bs-border-radius);
+}
+.bottom-article-card .bottom-article-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.bottom-article-title {
+  font-size: 0.95rem; /* Slightly smaller for mobile */
+  line-height: 1.3;
+}
+
+/* Adjust bottom article for larger screens */
+@media (min-width: 768px) {
+  .bottom-article-card .bottom-article-img-wrapper {
+    padding-top: 75%; /* Aspect ratio 4:3 for tablets/desktops */
+  }
+  .bottom-article-title {
+    font-size: 1rem;
+  }
+}
+
+/* --- Side Articles Card Styles --- */
+.side-articles-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-article-card {
+  margin-bottom: 15px; /* Spacing between side articles */
+}
+
+.side-article-card .side-article-img-wrapper {
+  width: 100%;
+  padding-top: 66.66%; /* Aspect ratio 3:2 */
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--bs-border-radius);
+}
+
+.side-article-card .side-article-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.side-article-title {
+  font-size: 0.85rem; /* Smaller title for mobile side articles */
+  line-height: 1.2;
+  /* Limit lines of text for side article titles to prevent overflow */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Show up to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.side-article-card .author-info {
+  font-size: 0.75rem; /* Smaller font for author info */
+  white-space: nowrap; /* Prevent date/time from wrapping too aggressively */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Ensure it respects parent width */
+}
+
+/* Adjust side articles for larger screens */
+@media (min-width: 576px) {
+  .side-article-card .side-article-img-wrapper {
+    padding-top: 75%; /* Aspect ratio 4:3 */
+  }
+  .side-article-title {
+    font-size: 0.9rem;
+    -webkit-line-clamp: 2; /* Maybe 2 lines for larger mobile/small tablet */
+  }
+  .side-article-card .author-info {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .side-article-title {
+    font-size: 0.95rem; /* Slightly larger on desktop */
+    -webkit-line-clamp: 3; /* Back to 3 lines for desktop layout */
+  }
+  .side-article-card .author-info {
+    font-size: 0.85rem;
+  }
+}
+
+/* Horizontal rule for side articles, hide last one */
+.side-article-divider:last-of-type {
+  display: none;
+}

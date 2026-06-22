@@ -1,0 +1,64 @@
+# =========================================================
+# PMIS Workspace - Codex ignore
+# Use this when VS Code is opened at D:\pmis-workspace
+# =========================================================
+
+# Backend junk
+pmis-backend/node_modules/
+pmis-backend/package-lock.json
+pmis-backend/.env
+pmis-backend/.env.*
+pmis-backend/.cache/
+pmis-backend/coverage/
+pmis-backend/secure-logs/
+pmis-backend/src/secure-logs/
+pmis-backend/ssl/
+pmis-backend/src/ssl/
+pmis-backend/uploads/
+pmis-backend/src/uploads/
+pmis-backend/public/uploads/
+pmis-backend/storage/
+pmis-backend/exports/
+pmis-backend/reports/
+pmis-backend/generated/
+pmis-backend/generated-pdfs/
+pmis-backend/invoices/
+pmis-backend/attachments/
+pmis-backend/secrets/
+pmis-backend/private/
+pmis-backend/*.log
+pmis-backend/**/*.log
+
+# Frontend junk
+pmis-frontend/node_modules/
+pmis-frontend/package-lock.json
+pmis-frontend/.env
+pmis-frontend/.env.*
+pmis-frontend/.next/
+pmis-frontend/out/
+pmis-frontend/dist/
+pmis-frontend/build/
+pmis-frontend/.vercel/
+pmis-frontend/.turbo/
+pmis-frontend/.cache/
+pmis-frontend/*.tsbuildinfo
+pmis-frontend/public/uploads/
+pmis-frontend/public/generated/
+pmis-frontend/uploads/
+pmis-frontend/exports/
+pmis-frontend/reports/
+pmis-frontend/generated/
+pmis-frontend/screenshots/
+pmis-frontend/secrets/
+pmis-frontend/private/
+pmis-frontend/*.log
+pmis-frontend/**/*.log
+
+# General workspace junk
+**/node_modules/
+**/.env
+**/.env.*
+**/.cache/
+**/*.log
+**/.DS_Store
+**/Thumbs.db
